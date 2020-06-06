@@ -1,3 +1,5 @@
+const finalscore = document.getElementById("final_score");
+
 const username = document.getElementById("username");
 
 const saveScoreBtn = document.getElementById("saveScoreBtn");
@@ -16,7 +18,7 @@ const MAX_HIGH_SCORES = 5;
 
 
 
-finalScore.innerText = mostRecentScore;
+final_score.innerText = "Your final score is: "+ mostRecentScore;
 
 
 
