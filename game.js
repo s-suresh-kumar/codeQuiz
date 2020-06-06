@@ -30,6 +30,24 @@ let availableQuesions = [];
 
 let questions = [];
 
+var sec = 75;
+var timer;
+
+function setTime() {
+    console.log('INSIDE SET TIME', sec);
+  timer = setInterval(function() {
+    console.log('INSIDE SET INTERVAL', sec);
+    sec--;
+   // timeEl.textContent = secondsLeft + " seconds left till colorsplosion.";
+   document.getElementById('timer').innerHTML = 'Time: ' +'00:' + sec;
+    if(sec === 0) {
+      clearInterval(timer);
+      alert("Time is up!")
+      //sendMessage();
+    }
+
+  }, 1000);
+}
 
 
 fetch(
@@ -87,9 +105,9 @@ fetch(
     });
 
 
-
+ 
     startGame();
-
+    setTime();
 })
 
 .catch(err => {
@@ -112,33 +130,12 @@ function setTime() {
 
   }, 1000);
 } */
-var sec = 75;
-var timer;
-/*
-function setTime() {
-    console.log('INSIDE SET TIME', sec);
-  timer = setInterval(function() {
-    console.log('INSIDE SET INTERVAL', sec);
-    sec--;
-   // timeEl.textContent = secondsLeft + " seconds left till colorsplosion.";
-   document.getElementById('timer').innerHTML = 'Time: ' +'00:' + sec;
-    if(sec === 0) {
-      clearInterval(timer);
-      alert("Time is up!")
-      //sendMessage();
-    }
 
-  }, 1000);
-}
-*/
 //CONSTANTS
 
 const CORRECT_BONUS = 10;
 
 const MAX_QUESTIONS = 3;
-
-var timer;
-var sec = 75;
 
 startGame = () => {
 
@@ -281,7 +278,7 @@ choices.forEach(choice => {
         selectedChoice.parentElement.classList.add(classToApply);
 
 
-        /*     
+            
                 setTimeout(() => {
 
                     selectedChoice.parentElement.classList.remove(classToApply);
@@ -289,9 +286,9 @@ choices.forEach(choice => {
                     getNewQuestion();
 
                 }, 1000);
-*/
 
 
+/*
         (function() {
 
 
@@ -313,11 +310,11 @@ choices.forEach(choice => {
             startTimer();
         })(); 
 
-    }); 
+    }); */
 
 });
-/*});
-
+});
+/*
 (function() {
 
 
