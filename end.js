@@ -40,7 +40,8 @@ saveHighScore = e => {
 
     const score = {
 
-        score: Math.floor(Math.random() * 100),
+      //  score: Math.floor(Math.random() * 100),
+        score: mostRecentScore,
 
         name: username.value
 
@@ -56,6 +57,6 @@ saveHighScore = e => {
 
     localStorage.setItem("highScores", JSON.stringify(highScores));
 
-    window.location.assign("/");
+    window.location.assign("highscores.html");
 
 };

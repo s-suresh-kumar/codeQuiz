@@ -2,7 +2,7 @@ const highScoresList = document.getElementById("highScoresList");
 
 const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
-
+const clear_high_scores = document.getElementById("clear_high_scores");
 
 highScoresList.innerHTML = highScores
 
@@ -13,3 +13,11 @@ highScoresList.innerHTML = highScores
 })
 
 .join("");
+
+
+clear_high_scores.addEventListener("click", e => {
+
+    console.log('clear high scores');
+    window.localStorage.clear();
+
+});
