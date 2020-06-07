@@ -21,3 +21,7 @@ clear_high_scores.addEventListener("click", e => {
     window.localStorage.clear();
 
 });
+
+function goBack() {
+    window.history.back();
+  }

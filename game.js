@@ -16,6 +16,8 @@ const game = document.getElementById("game");
 
 const vhsLink = document.getElementById("vhsLink")
 
+const resultDiv = document.getElementById("result-container")
+
 let currentQuestion = {};
 
 let acceptingAnswers = false;
@@ -276,12 +278,22 @@ choices.forEach(choice => {
 
 
         selectedChoice.parentElement.classList.add(classToApply);
-
+        str = classToApply + "!";
+        str=str.fontsize("3");
+        
+        str=str.bold();
+        
+      // resultDiv.innerHTML='<br/><hr style="height:5px; color:grey";><br/>' + ' <p style="font-size:18px; font-weight:bold">  classToApply + "!"</p>';
+      resultDiv.innerHTML=`${`<br/><hr /><br/>` + str }`;
+     //resultDiv.write('<br/>');
+     
+     //resultDiv.innerHTML.write(<hr style="font-weight:bold"/>);
 
             
                 setTimeout(() => {
 
                     selectedChoice.parentElement.classList.remove(classToApply);
+                    resultDiv.innerHTML="";
 
                     getNewQuestion();
 
