@@ -23,9 +23,12 @@ function setTime() {
     console.log("INSIDE SET INTERVAL", sec);
     sec--;
     document.getElementById("timer").innerHTML = "Time: " + "00:" + sec;
+    if (sec < 0) sec = 0;
     if (sec === 0) {
-      clearInterval(timer);
-      alert("Time is up!");
+      localStorage.setItem("mostRecentScore", sec);
+      localStorage.setItem("farewellMsg", "Clock Ran Out! Try Again");
+      //go to the end page
+      return window.location.assign("end.html");
     }
   }, 1000);
 }
@@ -93,8 +96,14 @@ const questions = [
 ];
 
 getNewQuestion = () => {
-  if (availableQuesions.length === 0 || questionCounter >= MAX_QUESTIONS) {
+  if (
+    availableQuesions.length === 0 ||
+    questionCounter >= MAX_QUESTIONS ||
+    sec < 1
+  ) {
+    if (sec < 0) sec = 0;
     localStorage.setItem("mostRecentScore", sec);
+    localStorage.setItem("farewellMsg", "Great Job");
     //go to the end page
     return window.location.assign("end.html");
   }
@@ -160,10 +169,10 @@ choices.forEach((choice) => {
       sec -= 10;
       audioElement.setAttribute("src", "Assets/sounds/wrong_answer_beep.wav");
       audioElement.play();
-      if (sec < 0) {
+      /* if (sec < 0) {
         clearInterval(timer);
         alert("Time is up!");
-      }
+      } */
     }
 
     selectedChoice.parentElement.classList.add(classToApply);
