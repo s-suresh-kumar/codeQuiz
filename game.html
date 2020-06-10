@@ -1,52 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Javascript Quiz - Play</title>
     <link rel="stylesheet" href="Assets/css/style.css" />
     <link rel="stylesheet" href="Assets/css/game.css" />
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div class="container">
-        <div id="loader"></div>
-        <div id="game" class="justify-center flex-column hidden">
-            <div id="hud">
-                <div id="hud-item">   
-                <a id="vhsLink" href="highscores.html" style="font-size:16px; font-weight:bold; text-decoration:none; color:indigo">View High Scores</a>
-                </div>
-                <div id="hud-item">
-                <p class="hud-prefix"  style="font-size:16px; font-weight:bold; text-decoration:none; color:indigo" id="timer">
-                </p>                   
-                </div>
-            </div>
-            <h2 id="question">Hi</h2>
-            <div class="choice-container">
-                <p class="choice-prefix">1</p>
-                <p class="choice-text" data-number="1"></p>
-            </div>
-            <div class="choice-container">
-                <p class="choice-prefix">2</p>
-                <p class="choice-text" data-number="2"></p>
-            </div>
-            <div class="choice-container">
-                <p class="choice-prefix">3</p>
-                <p class="choice-text" data-number="3"></p>
-            </div>
-            <div class="choice-container">
-                <p class="choice-prefix">4</p>
-                <p class="choice-text" data-number="4"></p>
-            </div>
-            <div id="result-container" style="color:indigo">
-            </div>
+      <div id="loader"></div>
+      <div id="game" class="justify-center flex-column hidden">
+        <div id="hud">
+          <div id="hud-item">
+            <a
+              id="vhsLink"
+              href="highscores.html"
+              style="
+                font-size: 16px;
+                font-weight: bold;
+                text-decoration: none;
+                color: indigo;
+              "
+              >View High Scores</a
+            >
+          </div>
+          <div id="hud-item">
+            <p
+              class="hud-prefix"
+              style="
+                font-size: 16px;
+                font-weight: bold;
+                text-decoration: none;
+                color: indigo;
+              "
+              id="timer"
+            ></p>
+          </div>
         </div>
+        <br /><br /><br /><br />
+        <h3 id="question" style="font-weight: bold; color: indigo;">Hi</h3>
+        <br /><br />
+        <div class="choice-container">
+          <p class="choice-prefix">1</p>
+          <p class="choice-text" data-number="1"></p>
+        </div>
+        <div class="choice-container">
+          <p class="choice-prefix">2</p>
+          <p class="choice-text" data-number="2"></p>
+        </div>
+        <div class="choice-container">
+          <p class="choice-prefix">3</p>
+          <p class="choice-text" data-number="3"></p>
+        </div>
+        <div class="choice-container">
+          <p class="choice-prefix">4</p>
+          <p class="choice-text" data-number="4"></p>
+        </div>
+        <div id="result-container" style="color: indigo;"></div>
+      </div>
     </div>
     <script src="game.js"></script>
-</body>
-
+  </body>
 </html>
