@@ -79,7 +79,7 @@ const questions = [
     choice2: "get()",
     choice3: "pop()",
     choice4: "None of the above",
-    Answer: 3,
+    answer: 3,
   },
   {
     question:
@@ -88,7 +88,7 @@ const questions = [
     choice2: "fontcolor()",
     choice3: "fontsize()",
     choice4: "italics()",
-    Answer: 4,
+    answer: 4,
   },
 ];
 
