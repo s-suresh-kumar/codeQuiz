@@ -6,7 +6,7 @@ const game = document.getElementById("game");
 const vhsLink = document.getElementById("vhsLink");
 const resultDiv = document.getElementById("result-container");
 const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = 6;
+const MAX_QUESTIONS = 4;
 
 let currentQuestion = {};
 let acceptingAnswers = false;
