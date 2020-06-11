@@ -1,3 +1,4 @@
+// const variables that point to HTML elements in game.html
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const timerText = document.getElementById("timer");
@@ -5,25 +6,42 @@ const loader = document.getElementById("loader");
 const game = document.getElementById("game");
 const vhsLink = document.getElementById("vhsLink");
 const resultDiv = document.getElementById("result-container");
-const CORRECT_BONUS = 10;
+
+//app constant that holds the max questions
 const MAX_QUESTIONS = 4;
 
+// app variable declarations that don't remain constant
 let currentQuestion = {};
 let acceptingAnswers = false;
-let score = 0;
 let questionCounter = 0;
 let availableQuesions = [];
 
+// count down timer related app variables
 let sec = 75;
 let timer;
 
+//This function runs the count down timer as soon as the game starts
+//every one second, it displays updated timer value
+//If the timer value reaches zero, game is ended and the app
+//loads  end.html
 function setTime() {
-  console.log("INSIDE SET TIME", sec);
+  //Actual javascript timer call
+  //with anonymous function to be executed at
+  //every 1000 milliseconds
   timer = setInterval(function () {
-    console.log("INSIDE SET INTERVAL", sec);
+    //decrement the timer value (sec) every 1000 millisec
     sec--;
+    //update the timer display on game.html
     document.getElementById("timer").innerHTML = "Time: " + "00:" + sec;
+    //the timer value , sec could become -ve due to 10 sec penalty to
+    //wrong answers. We do not want to show -ve score to user
+    // make it 0 if less than 0
     if (sec < 0) sec = 0;
+
+    //If the user exhausted timescore and reached zero
+    //end the game and locad end.html.btn
+    //Also load his score as mostRecentScore in localStorage
+    //Store the message to be displayed in end.html
     if (sec === 0) {
       localStorage.setItem("mostRecentScore", sec);
       localStorage.setItem("farewellMsg", "Clock Ran Out! Try Again");
@@ -32,7 +50,7 @@ function setTime() {
     }
   }, 1000);
 }
-
+// The following holds questions, answer choices in questions array
 const questions = [
   {
     question: "How do you write 'Hello World' in an alert box?",
@@ -95,24 +113,34 @@ const questions = [
   },
 ];
 
+//This function gets a new question at the start of game and at the end of
+//every question for which user has already chose an answer
 getNewQuestion = () => {
+  //Look to see if the game has ended
+  //It can end if no remaining questions to be asked
+  //Or time ran out
   if (
     availableQuesions.length === 0 ||
     questionCounter >= MAX_QUESTIONS ||
     sec < 1
   ) {
+    //Make sure time is not -ve
     if (sec < 0) sec = 0;
+    //Store the score and final message in local storage
     localStorage.setItem("mostRecentScore", sec);
     localStorage.setItem("farewellMsg", "Great Job");
     //go to the end page
     return window.location.assign("end.html");
   }
 
+  //access the next question in a random fashion from the array
+  //Present it to the user by writing it to the HTML
   questionCounter++;
   const questionIndex = Math.floor(Math.random() * availableQuesions.length);
   currentQuestion = availableQuesions[questionIndex];
   question.innerHTML = currentQuestion.question;
-
+  // Get the answer choices of the question
+  // and present them to the user by writing to innerHTML
   choices.forEach((choice) => {
     const number = choice.dataset["number"];
     choice.innerHTML = currentQuestion["choice" + number];
@@ -122,12 +150,16 @@ getNewQuestion = () => {
   acceptingAnswers = true;
 };
 
+//This is where the game is started when game.js is loaded
 startGame = () => {
+  //Initialize questionCounter, availableQuestion
   questionCounter = 0;
-  score = 0;
   availableQuesions = [...questions];
+  //Get a new question and present it with answer choices
   getNewQuestion();
+  //update the DOM to show countdown timer with current value
   document.getElementById("timer").innerHTML = "Time: " + "00:" + sec;
+
   game.classList.remove("hidden");
   loader.classList.add("hidden");
 };
@@ -150,6 +182,8 @@ function createVHSLink() {
   return a;
 }
 
+//attach EventListeners and process user's
+//answer
 choices.forEach((choice) => {
   choice.addEventListener("click", (e) => {
     if (!acceptingAnswers) return;
@@ -160,27 +194,36 @@ choices.forEach((choice) => {
     const audioElement = document.createElement("audio");
     const classToApply =
       selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
-
+    //If the user selected correct answer, play a distinct
+    //correct answer audio.
     if (classToApply === "correct") {
-      incrementScore(CORRECT_BONUS);
       audioElement.setAttribute("src", "Assets/sounds/correct_answer_beep.wav");
       audioElement.play();
     } else {
+      //for wrong answers
+      // penalise the user with 10 timerscore seconds
+      // play a distince incorrect answer audio
       sec -= 10;
       audioElement.setAttribute("src", "Assets/sounds/wrong_answer_beep.wav");
       audioElement.play();
-      /* if (sec < 0) {
-        clearInterval(timer);
-        alert("Time is up!");
-      } */
     }
-
+    // prepare 'incorrect!' or 'correct' text and
+    // and horizontal rule to be presented for 1 sec
+    // to notify user of correct/incorrect answer
+    // Also red/green background is applied to selected
+    // answer choice and remains applied for a second.
     selectedChoice.parentElement.classList.add(classToApply);
     str = classToApply + "!";
     str = str.fontsize("3");
     str = str.bold();
     resultDiv.innerHTML = `${`<br/><hr /><br/>` + str}`;
 
+    //The following runs a 1 second timer and at the end of
+    // the green/red back ground is removed
+    // The 'horizontal rule', 'correct!', ir 'incorrect!'
+    // texts are removed with "" (blank);
+    // Finally a new question is selection is initated by
+    // calling getNewQuestion.
     setTimeout(() => {
       selectedChoice.parentElement.classList.remove(classToApply);
       resultDiv.innerHTML = "";
@@ -188,8 +231,3 @@ choices.forEach((choice) => {
     }, 1000);
   });
 });
-
-incrementScore = (num) => {
-  score += num;
-  // scoreText.innerText = score;
-};
