@@ -20,28 +20,19 @@ let availableQuesions = [];
 let sec = 75;
 let timer;
 
-//This function runs the count down timer as soon as the game starts
-//every one second, it displays updated timer value
-//If the timer value reaches zero, game is ended and the app
-//loads  end.html
+//This function runs the count down timer as soon as the game starts every one second, it displays updated timer value. If the timer value reaches zero, game is ended and the app loads  end.html
 function setTime() {
-  //Actual javascript timer call
-  //with anonymous function to be executed at
+  //Actual javascript timer call with anonymous function to be executed at
   //every 1000 milliseconds
   timer = setInterval(function () {
     //decrement the timer value (sec) every 1000 millisec
     sec--;
     //update the timer display on game.html
     document.getElementById("timer").innerHTML = "Time: " + "00:" + sec;
-    //the timer value , sec could become -ve due to 10 sec penalty to
-    //wrong answers. We do not want to show -ve score to user
-    // make it 0 if less than 0
+    //the timer value , sec could become -ve due to 10 sec penalty to wrong answers. We do not want to show -ve score to user. Make it 0 if less than 0
     if (sec < 0) sec = 0;
 
-    //If the user exhausted timescore and reached zero
-    //end the game and locad end.html.btn
-    //Also load his score as mostRecentScore in localStorage
-    //Store the message to be displayed in end.html
+    //If the user exhausted timescore and reached zero, end the game and load end.htmlAlso load his score as mostRecentScore in localStorage. Store the message to be displayed in end.html
     if (sec === 0) {
       localStorage.setItem("mostRecentScore", sec);
       localStorage.setItem("farewellMsg", "Clock Ran Out! Try Again");
@@ -113,12 +104,9 @@ const questions = [
   },
 ];
 
-//This function gets a new question at the start of game and at the end of
-//every question for which user has already chose an answer
+//This function gets a new question at the start of game and at the end of every question for which user has already chose an answer
 getNewQuestion = () => {
-  //Look to see if the game has ended
-  //It can end if no remaining questions to be asked
-  //Or time ran out
+  //Look to see if the game has ended. It can end if no remaining questions to be asked Or time ran out
   if (
     availableQuesions.length === 0 ||
     questionCounter >= MAX_QUESTIONS ||
@@ -133,14 +121,12 @@ getNewQuestion = () => {
     return window.location.assign("end.html");
   }
 
-  //access the next question in a random fashion from the array
-  //Present it to the user by writing it to the HTML
+  //access the next question in a random fashion from the array. Present it to the user by writing it to the HTML
   questionCounter++;
   const questionIndex = Math.floor(Math.random() * availableQuesions.length);
   currentQuestion = availableQuesions[questionIndex];
   question.innerHTML = currentQuestion.question;
-  // Get the answer choices of the question
-  // and present them to the user by writing to innerHTML
+  // Get the answer choices of the question and present them to the user by writing to innerHTML
   choices.forEach((choice) => {
     const number = choice.dataset["number"];
     choice.innerHTML = currentQuestion["choice" + number];
@@ -182,8 +168,7 @@ function createVHSLink() {
   return a;
 }
 
-//attach EventListeners and process user's
-//answer
+//attach EventListeners and process user's answer
 choices.forEach((choice) => {
   choice.addEventListener("click", (e) => {
     if (!acceptingAnswers) return;
@@ -194,36 +179,25 @@ choices.forEach((choice) => {
     const audioElement = document.createElement("audio");
     const classToApply =
       selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
-    //If the user selected correct answer, play a distinct
-    //correct answer audio.
+    //If the user selected correct answer, play a distinct correct answer audio.
     if (classToApply === "correct") {
       audioElement.setAttribute("src", "Assets/sounds/correct_answer_beep.wav");
       audioElement.play();
     } else {
-      //for wrong answers
-      // penalise the user with 10 timerscore seconds
-      // play a distince incorrect answer audio
+      //for wrong answers penalize the user with 10 timerscore seconds and play a distinct incorrect answer audio
       sec -= 10;
       audioElement.setAttribute("src", "Assets/sounds/wrong_answer_beep.wav");
       audioElement.play();
     }
-    // prepare 'incorrect!' or 'correct' text and
-    // and horizontal rule to be presented for 1 sec
-    // to notify user of correct/incorrect answer
-    // Also red/green background is applied to selected
-    // answer choice and remains applied for a second.
+
+    // prepare 'incorrect!' or 'correct!' text and horizontal rule to be presented for 1 sec to notify user of correct/incorrect answer. Also red/green background is applied to selected answer choice and remains applied for a second.
     selectedChoice.parentElement.classList.add(classToApply);
     str = classToApply + "!";
     str = str.fontsize("3");
     str = str.bold();
     resultDiv.innerHTML = `${`<br/><hr /><br/>` + str}`;
 
-    //The following runs a 1 second timer and at the end of
-    // the green/red back ground is removed
-    // The 'horizontal rule', 'correct!', ir 'incorrect!'
-    // texts are removed with "" (blank);
-    // Finally a new question is selection is initated by
-    // calling getNewQuestion.
+    //The following runs a 1 second timer and at the end of the second green/red background is removed. The 'horizontal rule', 'correct!', 'incorrect!' texts are removed with "" (blank); Finally a new question selection is initated by calling getNewQuestion.
     setTimeout(() => {
       selectedChoice.parentElement.classList.remove(classToApply);
       resultDiv.innerHTML = "";
