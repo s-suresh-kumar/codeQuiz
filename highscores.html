@@ -11,6 +11,7 @@
   </head>
 
   <body>
+    <!--Begin main div acting as container-->
     <div class="container">
       <div id="Highscores" class="flex-center flex-column">
         <h3 id="finalScore">
@@ -18,13 +19,16 @@
         </h3>
         <ul id="highScoresList"></ul>
         <div>
+          <!--Button to go to start page and take quiz again-->
           <a class="btn" href="index.html">Go Back</a>
+          <!--Button to clear the stored high scores from localStorage-->
           <a class="btn" id="clear_high_scores" href="highscores.html"
             >Clear Highscores</a
           >
         </div>
       </div>
     </div>
+    <!-- End of main div that act as container-->
     <script src="highscores.js"></script>
   </body>
 </html>
