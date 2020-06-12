@@ -1,31 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>All done!</title>
     <link rel="stylesheet" href="Assets/css/style.css" />
-
-</head>
-<body>
-     <!--Begin outer div acting as  container-->
+  </head>
+  <body>
+    <!--Begin outer div acting as  container-->
     <div class="container">
-        <div id="end" class="flex-center flex-column">
-            <h3 id="finalScore">All done!</h3>
-            <!--Create form to accept user Initials-->
-            <form>
-                <h4 id="final_score" class="final_score_text"> Your final score is: </h4>
-                <div class="form-group">
-                    <label for="Player" class="label1">Enter Initials: </label>
-                    <input name="username" id="username" />  
-                    <!--Button to submit user Initials-->              
-                    <button type="submit" class="btn" id="saveScoreBtn" onclick="saveHighScore(event)" disabled>Submit</button>       
-                </div>
-        </div>
+      <div id="end" class="flex-center flex-column">
+        <h3 id="finalScore">All done!</h3>
+        <!--Create form to accept user Initials-->
+        <form>
+          <h4 id="final_score" class="final_score_text">
+            Your final score is:
+          </h4>
+          <div class="form-group">
+            <label class="label1">Enter Initials: </label>
+            <input name="username" id="username" />
+            <!--Button to submit user Initials-->
+            <button
+              type="submit"
+              class="btn"
+              id="saveScoreBtn"
+              onclick="saveHighScore(event)"
+              disabled
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
     <!-- End outer div that acts as container-->
     <script src="end.js"></script>
-</body>
+  </body>
 </html>
