@@ -179,23 +179,27 @@ choices.forEach((choice) => {
     const audioElement = document.createElement("audio");
     const classToApply =
       selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+    let resultStr;
     //If the user selected correct answer, play a distinct correct answer audio.
     if (classToApply === "correct") {
       audioElement.setAttribute("src", "Assets/sounds/correct_answer_beep.wav");
       audioElement.play();
+      resultStr = "Correct!";
     } else {
       //for wrong answers penalize the user with 10 timerscore seconds and play a distinct incorrect answer audio
       sec -= 10;
       audioElement.setAttribute("src", "Assets/sounds/wrong_answer_beep.wav");
       audioElement.play();
+      resultStr = "Incorrect!";
     }
 
     // prepare 'incorrect!' or 'correct!' text and horizontal rule to be presented for 1 sec to notify user of correct/incorrect answer. Also red/green background is applied to selected answer choice and remains applied for a second.
+
     selectedChoice.parentElement.classList.add(classToApply);
-    str = classToApply + "!";
-    str = str.fontsize("3");
-    str = str.bold();
-    resultDiv.innerHTML = `${`<br/><hr /><br/>` + str}`;
+
+    resultStr = resultStr.fontsize("3");
+    resultStr = resultStr.bold();
+    resultDiv.innerHTML = `${`<br/><hr /><br/>` + resultStr}`;
 
     //The following runs a 1 second timer and at the end of the second green/red background is removed. The 'horizontal rule', 'correct!', 'incorrect!' texts are removed with "" (blank); Finally a new question selection is initated by calling getNewQuestion.
     setTimeout(() => {
