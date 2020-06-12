@@ -10,10 +10,7 @@ const farewellMsg = localStorage.getItem("farewellMsg");
 //constant to hold maximum high scores
 const MAX_HIGH_SCORES = 5;
 
-// The following intimates the user of whether clock ran out or
-// he finished in time and scored more than zero. This was first set
-//in game.js in localStorage. Now retrieved from localStorage to show
-// the user.
+// The following intimates the user of whether clock ran out or the user finished in time and scored more than zero. This was first set in game.js in localStorage. Now retrieved from localStorage to show the user.
 finalScore.innerText = farewellMsg;
 
 //Similarly from localStorage, the user's score is retrieved and presented
