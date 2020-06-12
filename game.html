@@ -10,9 +10,11 @@
   </head>
 
   <body>
+    <!-- Begin of the main container-->
     <div class="container">
       <div id="loader"></div>
       <div id="game" class="justify-center flex-column hidden">
+        <!--Div to hold View high scores link and Timer-->
         <div id="hud">
           <div id="hud-item">
             <a id="vhsLink" href="highscores.html">View High Scores</a>
@@ -21,7 +23,9 @@
             <p class="hud-prefix" id="timer"></p>
           </div>
         </div>
+        <!--Display current question here-->
         <h3 id="question">Q?</h3>
+        <!--Display the four Answer Choices for the question above-->
         <div class="choice-container">
           <p class="choice-prefix">1</p>
           <p class="choice-text" data-number="1"></p>
@@ -41,6 +45,7 @@
         <div id="result-container"></div>
       </div>
     </div>
+    <!-- End of the main container-->
     <script src="game.js"></script>
   </body>
 </html>
